@@ -216,8 +216,9 @@ def eliminarPalabra():
         print("El apartado introducido no existe.")
         getch()
     
-#Funció per seleccionar el menu secundari al que s'accedirà, per posteriorment gestionar l'acció desitjada a cada situació.
+
 def entradaMenusSecundaris(eleccioMenuPrincipal):
+    #Funció per seleccionar el menu secundari al que s'accedirà, per posteriorment gestionar l'acció desitjada a cada situació.
     match eleccioMenuPrincipal:
     
         #Sortir del programa
