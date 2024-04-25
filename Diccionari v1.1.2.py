@@ -44,7 +44,7 @@ def getch():
     input("\nIntroduce cualquier cosa para continuar...")
     
 def menuPrincipal():
-    #Menu principal on selecciones que vols fer amb la Pokepedia
+    #Menu principal on selecciones què vols fer amb la Pokepedia
     print("Hola, bienvenido a la pokepedia.¿Qué quieres hacer?")
     print(str(MOSTRAR_CONTENIDO) + ". Ver contenido de la Pokepedia.")
     print(str(MODIFICAR_CONTENIDO) + ". Modificar contenido de la Pokepedia.")
@@ -117,6 +117,7 @@ def modificarPalabra():
     else: 
         print("La palabra introducida no existe.")
         getch()
+ 
 def modificarDefinicion():
     #Funció per modificar una definició
     clear()
@@ -166,10 +167,16 @@ def añadirPalabra():
     palabra = input("Qué palabra quieres añadir? ")
     definicion = input("Qué definicion tiene la palabra? ")
     
+    #Si la clau existeix a la Pokepedia:
+    if apartado in pokepedia.keys():
     #Afegim la paraula amb la definició donada dins de l'apartat especificat
-    pokepedia[apartado].update({palabra:definicion})
-    print("Palabra añadida con éxito.")
-    getch()
+        pokepedia[apartado].update({palabra:definicion})
+        print("Palabra añadida con éxito.")
+        getch()
+    #Si no s'ha trobat dins de la Pokepedia, li comuniquem a l'usuari.    
+    else:
+        print("El apartado introducido no existe.")
+        getch()
 
 def menuEliminarInfo():
     #Menu per eliminar informació
@@ -197,11 +204,17 @@ def eliminarPalabra():
     apartado = input("De qué apartado es la palabra que quieres eliminar? ")
     palabra = input("Qué palabra quieres eliminar? ")
     
-    #Eliminem la paraula donada
-    del pokepedia[apartado][palabra]
-    clear()
-    print("Palabra eliminada con éxito.")
-    getch()
+    #Si la clau existeix a la Pokepedia:
+    if apartado in pokepedia.keys():
+        #Eliminem la paraula donada
+        del pokepedia[apartado][palabra]
+        clear()
+        print("Palabra eliminada con éxito.")
+        getch()
+    #Si no s'ha trobat dins de la Pokepedia, li comuniquem a l'usuari.    
+    else:
+        print("El apartado introducido no existe.")
+        getch()
     
 #Funció per seleccionar el menu secundari al que s'accedirà, per posteriorment gestionar l'acció desitjada a cada situació.
 def entradaMenusSecundaris(eleccioMenuPrincipal):
@@ -247,14 +260,14 @@ def entradaMenusSecundaris(eleccioMenuPrincipal):
                 eliminarPalabra()
         
         #Opció no vàlida
-        case _: print('Opcio no vàlida')
+        case _: print('Opció no vàlida')
 
 #Main
 while eleccioMenuPrincipal != 0:
     clear()
     eleccioMenuPrincipal = -1
     eleccioSecundaria = -1
-    palabra = "a"
+
     #Menu Principal
     eleccioMenuPrincipal = menuPrincipal()
     clear()
